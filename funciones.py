@@ -1,4 +1,6 @@
 import cmath
+import keyword
+from statistics import variance
 import matplotlib.pyplot as plt
 import math
 import time
@@ -298,9 +300,86 @@ print(calculate_mode(lista))
 def calculate_range(lista):
     if not lista:
         return "No hay lista"
-    else: 
-        pass
+    return max(lista) - min(lista)
+
+print(calculate_range(lista))
 # calculate_variance, 
+def calculate_variance(lista):
+    print(variance(lista))
+
+calculate_variance(lista)
+
+def calculate_variance1(lista):
+    if not lista:
+        return "Lista vacía"
+    
+    n = len(lista)
+    media = sum(lista) / n
+    
+    suma_diferencias_cuadrado = 0
+    for x in lista:
+        diferencia = x - media
+        suma_diferencias_cuadrado += diferencia ** 2
+    
+    varianza = suma_diferencias_cuadrado / (n - 1)  # Muestral
+    return varianza
+
+print(calculate_variance1(lista))
 # calculate_std (standard deviation).
+def calculate_std(lista):
+    if not lista:
+        return "Lista vacia o inexistente"  
 
+    variance = calculate_variance1(lista)
+    if variance is None:
+        return "No se pudo calcular la varianza"
+    
+    desviacion_estandard = math.sqrt(variance)
+    return f"La desviacion estandar es {desviacion_estandard:.2f}"
 
+print(calculate_std(lista))
+
+# Write a function called is_prime, which checks if a number is prime.
+def is_prime(n):
+    for i in range(2, n):
+        if n % i == 0:
+            return f"{n} no es primo"
+    else:
+        return f"{n}  es primo"
+
+print(is_prime(2))
+print(is_prime(4))
+print(is_prime(17))
+
+# Write a functions which checks if all items are unique in the list.
+def is_unique(lista):
+    if len(lista) == len(set(lista)):
+        print (f"La lista {lista} es unica")
+    else: 
+        print(f"La lista tiene no tiene valores unicos")
+is_unique(lista)
+
+# Write a function which checks if all the items of the list are of the same data type.
+def same_type(lista):
+    referencia = type(lista[0])
+    for elemento in lista:
+         if type(elemento) != referencia:
+            return "Los elementos tienen tipos diferentes"
+    
+    return f"Todos los elementos son del tipo {referencia.__name__}"
+
+print(same_type(lista))
+lista_2 = [1, 2, 3, "staa"]
+print(same_type(lista_2))
+# Write a function which check if provided variable is a valid python variable
+def is_valid_variable(nombre_variable):
+    if not isinstance(nombre_variable, str):
+        return "Debe ser una cadena de texto"
+
+    if keyword.iskeyword(nombre_variable):
+        return f"'{nombre_variable}' es una palabra reservada en Python y no puede usarse como variable."
+
+    if nombre_variable.isidentifier():
+        return f"'{nombre_variable}' es un nombre de variable válido."
+    else:
+        return f"'{nombre_variable}' NO es un nombre de variable válido."
