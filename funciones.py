@@ -68,7 +68,7 @@ def check_in_season_2(month):
     else: 
         print("Mes no válido.")
         # Cuenta regresiva antes de salir
-        for i in range(3, 0, -1):
+        for i in range(1, 0, -1):
             print(f"Saliendo en {i}...")
             time.sleep(1)
         return "Has ingresado algo mal, saliendo..."
@@ -383,3 +383,25 @@ def is_valid_variable(nombre_variable):
         return f"'{nombre_variable}' es un nombre de variable válido."
     else:
         return f"'{nombre_variable}' NO es un nombre de variable válido."
+print(is_valid_variable("pass"))
+ # Go to the data folder and access the countries-data.py file.
+ # Create a function called the most_spoken_languages in the world.
+ # It should return 10 or 20 most spoken languages in the world in descending order
+from countries_info import countries_data
+from collections import Counter
+def most_spoken():
+    all_languages = [lang for country in countries_data for lang in country['languages']]
+    languaje_counter = Counter(all_languages)
+    most_spoken_language = languaje_counter.most_common(10)
+    print(most_spoken_language)
+
+most_spoken()
+# Create a function called the most_populated_countries. 
+# It should return 10 or 20 most populated countries in descending order.
+def most_populated_countries():
+    most_populated = sorted(countries_data, key=lambda x:x["population"], reverse=True)[:10]
+    print(f"\nTop 10 most populated countries:")
+    for country in most_populated:
+        print(f"{country['name']}: {country['population']}")
+
+most_populated_countries()
